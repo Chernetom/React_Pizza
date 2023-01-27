@@ -2,7 +2,8 @@ import './scss/app.scss';
 import Header from "./modules/Header";
 import Categories from "./modules/Categories";
 import Sort from "./modules/Sort";
-import PizzaBlock from "./modules/pizzaBlock";
+import PizzaBlock from "./modules/PizzaBlock";
+import pizzas from "./assets/pizzas.json";
 
 function App() {
   return (
@@ -16,10 +17,7 @@ function App() {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-              <PizzaBlock title={"Чизбургер-пицца"} price={350}/>
-              <PizzaBlock title={"Легато"} price={150}/>
-              <PizzaBlock title={"Вкусно и почка"} price={100}/>
-              <PizzaBlock title={"Бонапито"} price={1000}/>
+                {pizzas.map(p => <PizzaBlock {...p}  />)}
             </div>
           </div>
         </div>
