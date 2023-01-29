@@ -15,10 +15,10 @@ const PizzaBlock = (props) => {
             <h4 className="pizza-block__title">{props.title}</h4>
             <div className="pizza-block__selector">
                 <ul>
-                    {props.types.map((t,i)  => <li onClick={() => setActiveType(i)} className={activeType === i ? "active" : ""}>{t ? "традиционное" : "тонкое"}</li>)}
+                    {props.types.map((t,i)  => <li key={t} onClick={() => setActiveType(i)} className={activeType === i ? "active" : ""}>{t ? "традиционное" : "тонкое"}</li>)}
                 </ul>
                 <ul>
-                    {props.sizes.map((s,i)  => <li onClick={() => setActiveSize(i)} className={activeSize === i ? "active" : ""} >{s} см.</li>)}
+                    {props.sizes.map((s,i)  => <li key={s} onClick={() => setActiveSize(i)} className={activeSize === i ? "active" : ""} >{s} см.</li>)}
                 </ul>
             </div>
             <div className="pizza-block__bottom">
