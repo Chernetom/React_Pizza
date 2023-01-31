@@ -36,7 +36,7 @@ const Sort = ({value, onClickSort}) => {
             {isVisible && <div className="sort__popup">
                 <ul>
                     {sortObject.map((obj) =>
-                        <li onClick={() => sortName(obj)} className={value.name === obj.name ? "active" : ""}>{obj.name}</li>
+                        <li onClick={() => sortName(obj)} className={value.sortProperty === obj.sortProperty ? "active" : ""}>{obj.name}</li>
                     )}
                 </ul>
             </div> }
