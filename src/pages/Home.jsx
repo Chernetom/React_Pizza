@@ -5,17 +5,16 @@ import PizzaBlock from "../modules/PizzaBlock/PizzaBlock";
 import {useContext, useEffect, useState} from "react";
 import Paginator from "../modules/Paginator/Paginator";
 import {SearchContext} from "../App";
+import {useSelector} from "react-redux";
 
 const Home = () => {
+    const {categoryId, sort } = useSelector(state => state.filter);
+    const sortName = sort.sortName
+
     const {searchValue} = useContext(SearchContext);
     const [items,setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [categoryId,setCategoryId] = useState(0);
     const [currentPage,setCurrentPage] = useState(1);
-    const [sortName, setSortName] = useState({
-        name: 'популярности up',
-        sortProperty: 'rating'
-    });
 
     useEffect(() => {
         setIsLoading(true);
@@ -39,8 +38,8 @@ const Home = () => {
     return (
         <div className="container">
             <div className="content__top">
-                <Categories value={categoryId} onClickCategory={(id) => setCategoryId(id)} />
-                <Sort value={sortName} onClickSort={(name) => setSortName(name)} />
+                <Categories />
+                <Sort />
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
