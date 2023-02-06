@@ -6,10 +6,11 @@ import {useContext, useEffect, useState} from "react";
 import Paginator from "../modules/Paginator/Paginator";
 import {SearchContext} from "../App";
 import {useSelector} from "react-redux";
+import axios from 'axios';
+import qs from "qs";
 
 const Home = () => {
-    const {categoryId, sort } = useSelector(state => state.filter);
-    const sortName = sort.sortName
+    const {categoryId, sortName } = useSelector(state => state.filter);
 
     const {searchValue} = useContext(SearchContext);
     const [items,setItems] = useState([]);
@@ -23,14 +24,13 @@ const Home = () => {
         const order = sortName.sortProperty.includes('-') ? 'asc' : 'desc';
         const search = searchValue ? `search=${searchValue}` : '';
 
-        fetch(`https://63d67d25dc3c55baf43711e8.mockapi.io/items?page=${currentPage}&limit=4&${category}&${search}&sortBy=${sortBy}&order=${order}`)
+        axios
+            .get(`https://63d67d25dc3c55baf43711e8.mockapi.io/items?page=${currentPage}&limit=4&${category}&${search}&sortBy=${sortBy}&order=${order}`)
             .then(response => {
-                return response.json();
-            })
-            .then(json => {
-                setItems(json);
+                setItems(response.data);
                 setIsLoading(false);
-            });
+            })
+
             window.scrollTo(0, 0);
     },[categoryId, sortName, searchValue, currentPage]);
 
