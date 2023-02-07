@@ -7,7 +7,6 @@ import Paginator from "../modules/Paginator/Paginator";
 import {SearchContext} from "../App";
 import {useSelector} from "react-redux";
 import axios from 'axios';
-import qs from "qs";
 
 const Home = () => {
     const {categoryId, sortName } = useSelector(state => state.filter);
@@ -33,7 +32,6 @@ const Home = () => {
 
             window.scrollTo(0, 0);
     },[categoryId, sortName, searchValue, currentPage]);
-
 
     return (
         <div className="container">

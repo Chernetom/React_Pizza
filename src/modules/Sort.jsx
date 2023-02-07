@@ -1,27 +1,43 @@
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setSortName} from "../redux/slices/filterSlice";
+
+export const sortObject = [
+    {name: 'популярности up', sortProperty:'-rating'},
+    {name: 'популярности down', sortProperty:'rating'},
+    {name: 'цене up', sortProperty:'-price'},
+    {name: 'цене down', sortProperty:'price'},
+    {name: 'алфавиту up', sortProperty:'-title'},
+    {name: 'алфавиту down', sortProperty:'title'},
+];
 
 const Sort = () => {
     const sortName = useSelector(state => state.filter.sortName);
     const dispatch = useDispatch();
+    const sortRef = useRef();
 
     const [isVisible,setIsVisible] = useState(false);
-    const sortObject = [
-        {name: 'популярности up', sortProperty:'-rating'},
-        {name: 'популярности down', sortProperty:'rating'},
-        {name: 'цене up', sortProperty:'-price'},
-        {name: 'цене down', sortProperty:'price'},
-        {name: 'алфавиту up', sortProperty:'-title'},
-        {name: 'алфавиту down', sortProperty:'title'},
-    ];
+
     const changeSortName = (name) => {
         dispatch(setSortName(name));
         setIsVisible(false);
     }
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if(!event.path.includes(sortRef.current)) {
+                setIsVisible(false);
+            }
+        }
+        document.body.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.body.removeEventListener('click', handleClickOutside);
+        }
+    },[])
+
     return (
-        <div className="sort">
+        <div ref={sortRef} className="sort">
             <div className="sort__label">
                 <svg
                     width="10"
