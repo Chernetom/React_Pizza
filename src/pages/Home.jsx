@@ -2,9 +2,8 @@ import Categories from "../modules/Categories";
 import Sort from "../modules/Sort";
 import Skeleton from "../modules/PizzaBlock/Skeleton";
 import PizzaBlock from "../modules/PizzaBlock/PizzaBlock";
-import {useContext, useEffect, useState} from "react";
+import { useEffect, useState} from "react";
 import Paginator from "../modules/Paginator/Paginator";
-import {SearchContext} from "../App";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchPizzas} from "../redux/slices/pizzaSlice";
 
@@ -12,9 +11,8 @@ const Home = () => {
     const dispatch = useDispatch();
 
     const {items, status} = useSelector(state => state.pizza);
-    const {categoryId, sortName } = useSelector(state => state.filter);
+    const {categoryId, sortName, searchValue } = useSelector(state => state.filter);
 
-    const {searchValue} = useContext(SearchContext);
     const [currentPage,setCurrentPage] = useState(1);
 
     useEffect(() => {
