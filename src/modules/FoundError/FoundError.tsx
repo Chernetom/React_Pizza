@@ -1,6 +1,7 @@
+import React from "react";
 import s from "./FoundError.module.scss"
 
-const FoundError = () => {
+const FoundError: React.FC = () => {
     return (
         <div className={s.wrapper}>
             <span>😕</span>
