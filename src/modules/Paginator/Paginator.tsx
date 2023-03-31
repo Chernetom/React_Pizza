@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./Paginator.module.scss"
 
-type PaginatorProps = {currentPage: number, setCurrentPage: any}
+type PaginatorProps = {currentPage: number, setCurrentPage: (page: number) => void}
 
 const Paginator: React.FC<PaginatorProps> = ({currentPage, setCurrentPage}) => {
     const pageCount = [1,2,3];

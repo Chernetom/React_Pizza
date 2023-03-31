@@ -4,6 +4,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {setSortName} from "../redux/filter/filterSlice";
 import {selectFilterSortName} from "../redux/filter/filterSelectors";
 
+type PopupClick = MouseEvent & {
+    path: Node[];
+};
+
 export const sortObject = [
     {name: 'популярности up', sortProperty:'-rating'},
     {name: 'популярности down', sortProperty:'rating'},
@@ -26,8 +30,9 @@ const Sort: React.FC = () => {
     }
 
     useEffect(() => {
-        const handleClickOutside = (event: any) => {
-            if(!event.path.includes(sortRef.current)) {
+        const handleClickOutside = (event: MouseEvent) => {
+            const _event = event as PopupClick;
+            if(sortRef.current && !_event.path.includes(sortRef.current)) {
                 setIsVisible(false);
             }
         }
