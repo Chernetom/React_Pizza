@@ -1,6 +1,7 @@
+import React from "react";
 import FoundError from "../modules/FoundError/FoundError";
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
     return (
         <FoundError />
     )

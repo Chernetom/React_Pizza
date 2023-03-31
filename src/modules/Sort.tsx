@@ -1,6 +1,8 @@
+import React from "react";
 import {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setSortName} from "../redux/slices/filterSlice";
+import {setSortName} from "../redux/filter/filterSlice";
+import {selectFilterSortName} from "../redux/filter/filterSelectors";
 
 export const sortObject = [
     {name: 'популярности up', sortProperty:'-rating'},
@@ -11,20 +13,20 @@ export const sortObject = [
     {name: 'алфавиту down', sortProperty:'title'},
 ];
 
-const Sort = () => {
-    const sortName = useSelector(state => state.filter.sortName);
+const Sort: React.FC = () => {
+    const sortName = useSelector(selectFilterSortName);
     const dispatch = useDispatch();
-    const sortRef = useRef();
+    const sortRef = useRef<HTMLDivElement>(null);
 
     const [isVisible,setIsVisible] = useState(false);
 
-    const changeSortName = (name) => {
+    const changeSortName = (name: any) => {
         dispatch(setSortName(name));
         setIsVisible(false);
     }
 
     useEffect(() => {
-        const handleClickOutside = (event) => {
+        const handleClickOutside = (event: any) => {
             if(!event.path.includes(sortRef.current)) {
                 setIsVisible(false);
             }

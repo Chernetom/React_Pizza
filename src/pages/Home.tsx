@@ -1,3 +1,4 @@
+import React from "react";
 import Categories from "../modules/Categories";
 import Sort from "../modules/Sort";
 import Skeleton from "../modules/PizzaBlock/Skeleton";
@@ -5,13 +6,15 @@ import PizzaBlock from "../modules/PizzaBlock/PizzaBlock";
 import { useEffect, useState} from "react";
 import Paginator from "../modules/Paginator/Paginator";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchPizzas} from "../redux/slices/pizzaSlice";
+import {fetchPizzas} from "../redux/pizza/pizzaSlice";
+import {selectPizzaData} from "../redux/pizza/pizzaSelectors";
+import {selectFilter} from "../redux/filter/filterSelectors";
 
-const Home = () => {
+const Home: React.FC = () => {
     const dispatch = useDispatch();
 
-    const {items, status} = useSelector(state => state.pizza);
-    const {categoryId, sortName, searchValue } = useSelector(state => state.filter);
+    const {items, status} = useSelector(selectPizzaData);
+    const {categoryId, sortName, searchValue } = useSelector(selectFilter);
 
     const [currentPage,setCurrentPage] = useState(1);
 
@@ -23,6 +26,7 @@ const Home = () => {
             const search = searchValue ? `search=${searchValue}` : '';
 
             dispatch(
+                //@ts-ignore
                 fetchPizzas({
                     currentPage,
                     category,
@@ -49,7 +53,7 @@ const Home = () => {
                     ? <div>Произошла ошибка </div>
                     :   status === 'loading'
                         ? [...new Array(4)].map((_, index) => <Skeleton key={index} />)
-                        : items.map(p => <PizzaBlock key={p.id} {...p}  />)
+                        : items.map((p: any) => <PizzaBlock key={p.id} {...p}  />)
                 }
 
             </div>
