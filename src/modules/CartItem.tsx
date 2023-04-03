@@ -1,25 +1,23 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-import {addItem, minusItem, removeItem} from "../redux/cart/cartSlice";
+import {addItem, CartItem, minusItem, removeItem} from "../redux/cart/cartSlice";
 
 type CartProps = {
     id: string,
     title: string,
-    type: number,
+    type: string,
     price: number,
     count: number,
     imageUrl: string,
     size: number,
 }
 
-const CartItem: React.FC<CartProps> = ({id, title, type, price, count, imageUrl, size}) => {
+const CartItemBlock: React.FC<CartProps> = ({id, title, type, price, count, imageUrl, size}) => {
     const dispatch = useDispatch();
-    const types = ["тонкое", "традиционное"];
     const onClickPlus = () => {
         dispatch (
-            addItem({
-                id,
-            }),
+            addItem({ id,
+            } as CartItem),
         )
     }
     const onClickRemoveItem = () => {
@@ -43,7 +41,7 @@ const CartItem: React.FC<CartProps> = ({id, title, type, price, count, imageUrl,
             </div>
             <div className="cart__item-info">
                 <h3>{title}</h3>
-                <p>{types[type]}, {size} см.</p>
+                <p>{type}, {size} см.</p>
             </div>
             <div className="cart__item-count">
                 <div onClick={onClickMinus} className="button button--outline button--circle cart__item-count-minus">
@@ -93,4 +91,4 @@ const CartItem: React.FC<CartProps> = ({id, title, type, price, count, imageUrl,
     )
 }
 
-export default CartItem;
+export default CartItemBlock;

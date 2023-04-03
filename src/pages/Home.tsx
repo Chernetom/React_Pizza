@@ -5,13 +5,14 @@ import Skeleton from "../modules/PizzaBlock/Skeleton";
 import PizzaBlock from "../modules/PizzaBlock/PizzaBlock";
 import { useEffect, useState} from "react";
 import Paginator from "../modules/Paginator/Paginator";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {fetchPizzas} from "../redux/pizza/pizzaSlice";
 import {selectPizzaData} from "../redux/pizza/pizzaSelectors";
 import {selectFilter} from "../redux/filter/filterSelectors";
+import {useAppDispatch} from "../redux/store";
 
 const Home: React.FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const {items, status} = useSelector(selectPizzaData);
     const {categoryId, sortName, searchValue } = useSelector(selectFilter);
@@ -26,7 +27,6 @@ const Home: React.FC = () => {
             const search = searchValue ? `search=${searchValue}` : '';
 
             dispatch(
-                //@ts-ignore
                 fetchPizzas({
                     currentPage,
                     category,
