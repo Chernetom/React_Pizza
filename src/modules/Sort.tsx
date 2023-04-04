@@ -17,7 +17,7 @@ export const sortObject = [
     {name: 'алфавиту down', sortProperty:'title'},
 ];
 
-const Sort: React.FC = () => {
+const Sort: React.FC = React.memo(() => {
     const sortName = useSelector(selectFilterSortName);
     const dispatch = useDispatch();
     const sortRef = useRef<HTMLDivElement>(null);
@@ -70,5 +70,5 @@ const Sort: React.FC = () => {
             </div> }
         </div>
     )
-}
+})
 export default Sort;

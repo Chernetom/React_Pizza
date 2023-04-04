@@ -44,7 +44,7 @@ const CartItemBlock: React.FC<CartProps> = ({id, title, type, price, count, imag
                 <p>{type}, {size} см.</p>
             </div>
             <div className="cart__item-count">
-                <div onClick={onClickMinus} className="button button--outline button--circle cart__item-count-minus">
+                <button disabled={count === 1} onClick={onClickMinus} className="button button--outline button--circle cart__item-count-minus">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -55,7 +55,7 @@ const CartItemBlock: React.FC<CartProps> = ({id, title, type, price, count, imag
                             fill="#EB5A1E"></path>
                     </svg>
 
-                </div>
+                </button>
                 <b>{count}</b>
                 <div onClick={onClickPlus} className="button button--outline button--circle cart__item-count-plus">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
