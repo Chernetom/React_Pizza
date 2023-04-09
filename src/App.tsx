@@ -1,9 +1,11 @@
+import React, {Suspense} from "react";
 import './scss/app.scss';
 import Header from "./modules/Header";
 import Home from "./pages/Home";
 import {Route, Routes} from "react-router-dom";
-import NotFound from "./pages/NotFound";
-import Cart from "./pages/Cart";
+
+const Cart = React.lazy(() => import(/* webpackChunkName: "Cart" */ './pages/Cart'));
+const NotFound = React.lazy(() => import(/* webpackChunkName: "NotFound" */ './pages/NotFound'));
 
 function App() {
 
@@ -13,8 +15,14 @@ function App() {
             <div className="content">
                 <Routes>
                     <Route path="/"  element={<Home />}/>
-                    <Route path="/cart" element={<Cart />}/>
-                    <Route path="*" element={<NotFound />}/>
+                    <Route path="/cart" element={
+                    <Suspense fallback={<div>Идёт загрузка корзины...</div>}>
+                        <Cart />
+                    </Suspense>}/>
+                    <Route path="*" element={
+                    <Suspense fallback={<div>Идёт загрузка корзины...</div>}>
+                        <NotFound />
+                    </Suspense>}/>
                 </Routes>
             </div>
       </div>

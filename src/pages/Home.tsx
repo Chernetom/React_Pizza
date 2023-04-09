@@ -1,10 +1,6 @@
 import React from "react";
-import Categories from "../modules/Categories";
-import Sort from "../modules/Sort";
-import Skeleton from "../modules/PizzaBlock/Skeleton";
-import PizzaBlock from "../modules/PizzaBlock/PizzaBlock";
+import {Categories, Sort, Skeleton, PizzaBlock, Paginator} from "../modules";
 import { useEffect, useState} from "react";
-import Paginator from "../modules/Paginator/Paginator";
 import {useSelector} from "react-redux";
 import {fetchPizzas} from "../redux/pizza/pizzaSlice";
 import {selectPizzaData} from "../redux/pizza/pizzaSelectors";
